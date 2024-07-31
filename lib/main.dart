@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:rwad_two/widgets/my_appbar.dart';
+
+import 'dummy_projects/whatsapp/whatsapp_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -24,32 +25,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        appBar: myAppBar(),
-        body: Container(
-          color: Colors.red,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Container(
-                color: Colors.green,
-                child: Row(
-                  children: [
-                    Icon(Icons.access_alarm),
-                    Text("hello jjjjjjjjjjj"),
-                  ],
-                ),
-              ),
-              Text("hello  kkkkkkkkkkkkkkkkkkk"),
-              Text("hello"),
-              Text("hello"),
-              Text("hello"),
-              Text("hello"),
-            ],
-          ),
-        ),
-      ),
+      debugShowCheckedModeBanner: false,
+      home: WhatsappScreen(),
     );
   }
 }
