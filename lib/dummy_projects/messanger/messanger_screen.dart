@@ -69,37 +69,40 @@ class _MessangerScreenState extends State<MessangerScreen> {
   }
 
   Widget _chatItem(ChatModel model) {
-    return Row(
-      children: [
-        CircleAvatar(
-          radius: 24,
-          backgroundImage: NetworkImage(model.image ?? ""),
-        ),
-        SizedBox(
-          width: 15,
-        ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              model.name ?? "",
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
+    return GestureDetector(
+      onTap: () {},
+      child: Row(
+        children: [
+          CircleAvatar(
+            radius: 24,
+            backgroundImage: NetworkImage(model.image ?? ""),
+          ),
+          SizedBox(
+            width: 15,
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                model.name ?? "",
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-            SizedBox(
-              width: 100,
-              child: _msgType(model),
-            ),
-          ],
-        ),
-        Spacer(),
-        Icon(
-          CupertinoIcons.check_mark_circled_solid,
-          color: Colors.grey,
-        )
-      ],
+              SizedBox(
+                width: 100,
+                child: _msgType(model),
+              ),
+            ],
+          ),
+          Spacer(),
+          Icon(
+            CupertinoIcons.check_mark_circled_solid,
+            color: Colors.grey,
+          )
+        ],
+      ),
     );
   }
 
@@ -159,7 +162,7 @@ class _MessangerScreenState extends State<MessangerScreen> {
         onTapOutside: (event) {
           FocusScope.of(context).unfocus();
         },
-        decoration: const InputDecoration(
+        decoration: InputDecoration(
           border: InputBorder.none,
           prefixIcon: Icon(CupertinoIcons.search),
           label: Text("Search"),
@@ -170,10 +173,15 @@ class _MessangerScreenState extends State<MessangerScreen> {
 
   AppBar _appBar() {
     return AppBar(
-      leading: const Padding(
-        padding: EdgeInsets.only(left: 15.0, top: 10),
-        child: CircleAvatar(
-          backgroundImage: AssetImage("assets/images/man.jpg"),
+      leading: GestureDetector(
+        onTap: () {
+          print("hello");
+        },
+        child: const Padding(
+          padding: EdgeInsets.only(left: 15.0, top: 10),
+          child: CircleAvatar(
+            backgroundImage: AssetImage("assets/images/man.jpg"),
+          ),
         ),
       ),
       title: const Text(
