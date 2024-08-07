@@ -18,6 +18,16 @@ void main() {
 ///Row
 ///Padding
 ///AppBar
+///Expanded
+///CircleAvatar
+///Stack
+///TextFormField
+///GestureDetector
+///SingleChildScrollView
+///ListView.builder
+///ListView.separated
+///Image.network
+///Image.assets
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
