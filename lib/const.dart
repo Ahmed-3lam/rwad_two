@@ -3,6 +3,8 @@ const String image1 =
 const String image2 =
     "https://cdn3d.iconscout.com/3d/premium/thumb/man-avatar-8183369-6546914.png?f=webp";
 
+const imagePath = "assets/images/";
+
 List<Map> jsonList = [
   {
     "name": "Ahmed Allam",
