@@ -5,3 +5,4 @@ class Kcolors {
 }
 
 const Color primaryColor = Color(0xFFf9989);
+const Color bmiSecondaryColor = Color(0xFF252948);

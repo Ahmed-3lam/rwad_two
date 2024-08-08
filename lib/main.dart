@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'dummy_projects/messanger/messanger_screen.dart';
+import 'dummy_projects/ecommerce/splash/splash_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: MessangerScreen(),
+      home: SplashScreen(),
     );
   }
 }
