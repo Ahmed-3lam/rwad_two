@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import 'dummy_projects/ecommerce/splash/splash_screen.dart';
 
@@ -34,9 +35,20 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
+      theme: themeData(),
       debugShowCheckedModeBanner: false,
       home: SplashScreen(),
     );
   }
+}
+
+ThemeData themeData() {
+  return ThemeData(
+    inputDecorationTheme: InputDecorationTheme(
+      filled: true,
+      fillColor: Colors.grey[200],
+      border: InputBorder.none,
+    ),
+  );
 }

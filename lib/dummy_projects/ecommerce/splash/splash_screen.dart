@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
 
 import '../onboarding/onboarding_screen.dart';
 
@@ -36,9 +37,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Future.delayed(Duration(seconds: 2)).then(
       (val) {
         time.cancel();
-        Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => OnboardingScreen(),
-        ));
+        Get.offAll(OnboardingScreen());
       },
     );
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
 import 'package:rwad_two/dummy_projects/ecommerce/auth/auth_screen.dart';
 import 'package:rwad_two/dummy_projects/ecommerce/onboarding/onboarding_model.dart';
 
@@ -18,9 +19,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       index++;
       setState(() {});
     } else {
-      Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => AuthScreen(),
-      ));
+      Get.offAll(AuthScreen());
     }
   }
 
