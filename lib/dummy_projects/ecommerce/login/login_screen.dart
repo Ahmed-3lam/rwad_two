@@ -44,6 +44,8 @@ class LoginScreen extends StatelessWidget {
                         validator: (val) {
                           if (!val!.isEmail) {
                             return "this should be valid Email.";
+                          } else if (val!.length < 10) {
+                            return " email should be more than 10 letters";
                           }
                         },
                       ),
