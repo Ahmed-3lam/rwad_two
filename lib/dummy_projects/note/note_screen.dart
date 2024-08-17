@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rwad_two/dummy_projects/note/note_hive_helper.dart';
 
 class NoteScreen extends StatefulWidget {
   const NoteScreen({super.key});
@@ -8,8 +9,14 @@ class NoteScreen extends StatefulWidget {
 }
 
 class _NoteScreenState extends State<NoteScreen> {
-  List<String> myNotes = [];
   final _textController = TextEditingController();
+
+  @override
+  void initState() {
+    NoteHiveHelper.getNotes();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +32,7 @@ class _NoteScreenState extends State<NoteScreen> {
         actions: [
           InkWell(
             onTap: () {
-              myNotes.clear();
+              NoteHiveHelper.removeAllNote();
               setState(() {});
             },
             child: Padding(
@@ -53,7 +60,7 @@ class _NoteScreenState extends State<NoteScreen> {
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: ListView.builder(
-            itemCount: myNotes.length,
+            itemCount: NoteHiveHelper.myNotes.length,
             itemBuilder: (c, i) => InkWell(
                   onTap: () async {
                     await _showDialog(
@@ -70,17 +77,21 @@ class _NoteScreenState extends State<NoteScreen> {
                         height: 100,
                         width: double.infinity,
                         decoration: BoxDecoration(
-                            color: Colors.red.withOpacity(.2),
+                            color: i == 0
+                                ? Colors.red.withOpacity(.2)
+                                : i % 2 == 0
+                                    ? Colors.green.withOpacity(.2)
+                                    : Colors.yellow.withOpacity(.2),
                             borderRadius: BorderRadius.circular(12)),
                         child: Center(
-                          child: Text(myNotes[i]),
+                          child: Text(NoteHiveHelper.myNotes[i]),
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: InkWell(
                           onTap: () {
-                            myNotes.removeAt(i);
+                            NoteHiveHelper.removeNote(i);
                             setState(() {});
                           },
                           child: Icon(
@@ -102,7 +113,7 @@ class _NoteScreenState extends State<NoteScreen> {
       context: context,
       builder: (context) {
         if (isUpdate) {
-          _textController.text = myNotes[index!];
+          _textController.text = NoteHiveHelper.myNotes[index!];
         }
         return AlertDialog(
           title: const Text('Add a new Note'),
@@ -122,9 +133,14 @@ class _NoteScreenState extends State<NoteScreen> {
               onPressed: () {
                 if (_textController.text.isNotEmpty) {
                   if (isUpdate) {
-                    myNotes[index!] = _textController.text;
+                    NoteHiveHelper.updateNote(
+                      index: index!,
+                      text: _textController.text,
+                    );
                   } else {
-                    myNotes.add(_textController.text);
+                    NoteHiveHelper.addNote(
+                      _textController.text,
+                    );
                   }
                   _textController.text = "";
 
