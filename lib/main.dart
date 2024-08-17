@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:rwad_two/dummy_projects/bmi_calc/cubit/bmi_cubit.dart';
 import 'package:rwad_two/dummy_projects/note/note_hive_helper.dart';
 
-import 'dummy_projects/note/cubit/note_cubit.dart';
-import 'dummy_projects/note/note_screen.dart';
+import 'dummy_projects/bmi_calc/bmi_screen.dart';
 
 void main() async {
   await Hive.initFlutter();
@@ -42,11 +42,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => NoteCubit()..getNotes(),
+      create: (context) => BmiCubit(),
       child: GetMaterialApp(
         theme: themeData(),
         debugShowCheckedModeBanner: false,
-        home: NoteScreen(),
+        home: BmiScreen(),
       ),
     );
   }
