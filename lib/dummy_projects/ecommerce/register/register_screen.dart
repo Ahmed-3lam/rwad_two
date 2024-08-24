@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:rwad_two/const.dart';
-import 'package:rwad_two/dummy_projects/ecommerce/login/cubit/login_cubit.dart';
 import 'package:rwad_two/dummy_projects/ecommerce/login/widgets/custom_text_field.dart';
+import 'package:rwad_two/dummy_projects/ecommerce/register/cubit/register_cubit.dart';
 
-class LoginScreen extends StatelessWidget {
+class RegisterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.sizeOf(context).height;
@@ -13,10 +13,12 @@ class LoginScreen extends StatelessWidget {
     final _key = GlobalKey<FormState>();
     final _emailController = TextEditingController();
     final _passwordController = TextEditingController();
+    final _nameController = TextEditingController();
+    final _phoneController = TextEditingController();
 
-    return BlocListener<LoginCubit, LoginState>(
+    return BlocListener<RegisterCubit, RegisterState>(
       listener: (context, state) {
-        if (state is LoginErrorState) {
+        if (state is RegisterErrorState) {
           Get.snackbar(
             "Error",
             state.msg,
@@ -79,7 +81,28 @@ class LoginScreen extends StatelessWidget {
                         SizedBox(
                           height: height * .02,
                         ),
-                        BlocBuilder<LoginCubit, LoginState>(
+                        CustomTextField(
+                          height: height,
+                          controller: _nameController,
+                          text: "Name",
+                        ),
+                        SizedBox(
+                          height: height * .02,
+                        ),
+                        CustomTextField(
+                          height: height,
+                          controller: _phoneController,
+                          text: "Phone",
+                          validator: (val) {
+                            if (val!.length == 11) {
+                              return "Phone should be more than 11 Nums";
+                            }
+                          },
+                        ),
+                        SizedBox(
+                          height: height * .02,
+                        ),
+                        BlocBuilder<RegisterCubit, RegisterState>(
                           builder: (context, state) {
                             return MaterialButton(
                                 color: Colors.green,
@@ -87,9 +110,11 @@ class LoginScreen extends StatelessWidget {
                                 child: _loginWidget(state),
                                 onPressed: () {
                                   if (_key.currentState!.validate()) {
-                                    context.read<LoginCubit>().login(
+                                    context.read<RegisterCubit>().register(
                                           email: _emailController.text,
                                           password: _passwordController.text,
+                                          name: _nameController.text,
+                                          phone: _phoneController.text,
                                         );
                                   }
                                 });
@@ -107,14 +132,14 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  Widget _loginWidget(LoginState state) {
-    if (state is LoginLoadingState) {
+  Widget _loginWidget(RegisterState state) {
+    if (state is RegisterLoadingState) {
       return Center(
         child: CircularProgressIndicator(),
       );
     }
     return Text(
-      "Login",
+      "SignUp",
       style: TextStyle(
         fontSize: 20,
         color: Colors.white,

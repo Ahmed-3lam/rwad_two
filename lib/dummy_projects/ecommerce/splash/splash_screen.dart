@@ -2,6 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
+import 'package:rwad_two/dummy_projects/ecommerce/auth/auth_screen.dart';
+import 'package:rwad_two/dummy_projects/ecommerce/helpers/hive_helper.dart';
+import 'package:rwad_two/dummy_projects/ecommerce/main/main_screen.dart';
 
 import '../onboarding/onboarding_screen.dart';
 
@@ -37,7 +40,15 @@ class _SplashScreenState extends State<SplashScreen> {
     Future.delayed(Duration(seconds: 2)).then(
       (val) {
         time.cancel();
-        Get.offAll(OnboardingScreen());
+        if (HiveHelper.checkOnboardingBox()) {
+          if (HiveHelper.getToken()?.isEmpty ?? true) {
+            Get.offAll(AuthScreen());
+          } else {
+            Get.offAll(MainScreen());
+          }
+        } else {
+          Get.offAll(OnboardingScreen());
+        }
       },
     );
 

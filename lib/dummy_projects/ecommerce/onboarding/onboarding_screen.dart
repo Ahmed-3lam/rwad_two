@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:rwad_two/dummy_projects/ecommerce/auth/auth_screen.dart';
+import 'package:rwad_two/dummy_projects/ecommerce/helpers/hive_helper.dart';
 import 'package:rwad_two/dummy_projects/ecommerce/onboarding/onboarding_model.dart';
 
 import '../../../const.dart';
@@ -21,6 +22,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     } else {
       Get.offAll(AuthScreen());
     }
+  }
+
+  @override
+  void initState() {
+    HiveHelper.isFirstTime();
+    super.initState();
   }
 
   @override

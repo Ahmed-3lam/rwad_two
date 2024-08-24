@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:rwad_two/dummy_projects/ecommerce/login/login_screen.dart';
+import 'package:rwad_two/dummy_projects/ecommerce/register/register_screen.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});
@@ -101,18 +102,23 @@ class _AuthScreenState extends State<AuthScreen> {
                 SizedBox(
                   height: 20,
                 ),
-                Container(
-                  height: 56,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: Center(
-                    child: Text(
-                      "Create an account",
-                      style: TextStyle(
-                        fontSize: 16,
+                InkWell(
+                  onTap: () {
+                    Get.to(RegisterScreen());
+                  },
+                  child: Container(
+                    height: 56,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: Center(
+                      child: Text(
+                        "Create an account",
+                        style: TextStyle(
+                          fontSize: 16,
+                        ),
                       ),
                     ),
                   ),
