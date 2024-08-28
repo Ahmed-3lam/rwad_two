@@ -6,6 +6,7 @@ import 'package:rwad_two/dummy_projects/ecommerce/login/cubit/login_cubit.dart';
 
 import 'dummy_projects/ecommerce/helpers/dio_helpers.dart';
 import 'dummy_projects/ecommerce/helpers/hive_helper.dart';
+import 'dummy_projects/ecommerce/home/cubit/home_cubit.dart';
 import 'dummy_projects/ecommerce/register/cubit/register_cubit.dart';
 import 'dummy_projects/ecommerce/splash/splash_screen.dart';
 
@@ -27,6 +28,10 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => LoginCubit()),
         BlocProvider(create: (context) => RegisterCubit()),
+        BlocProvider(
+            create: (context) => HomeCubit()
+              ..getBanners()
+              ..getProducts()),
       ],
       child: GetMaterialApp(
         theme: themeData(),
