@@ -35,23 +35,41 @@ class _MainScreenState extends State<MainScreen> {
       ),
     ),
   ];
+  List<Widget> _navItems() => [
+        _navIcon(Icons.home, 0),
+        _navIcon(Icons.person, 1),
+        _navIcon(Icons.settings, 2),
+      ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: _screens[selectedIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: selectedIndex,
-        backgroundColor: Colors.green,
-        selectedItemColor: Colors.white,
-        onTap: (index) {
-          selectedIndex = index;
-          setState(() {});
-        },
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
-          BottomNavigationBarItem(icon: Icon(Icons.settings), label: "Setting"),
-        ],
+      bottomNavigationBar: Container(
+        height: 60,
+        width: double.infinity,
+        margin: EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          color: Colors.green,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: _navItems(),
+        ),
+      ),
+    );
+  }
+
+  Widget _navIcon(IconData icon, int index) {
+    return InkWell(
+      onTap: () {
+        selectedIndex = index;
+        setState(() {});
+      },
+      child: Icon(
+        icon,
+        size: 40,
+        color: index == selectedIndex ? Colors.white : null,
       ),
     );
   }
