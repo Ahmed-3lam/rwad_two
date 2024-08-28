@@ -1,4 +1,6 @@
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:rwad_two/dummy_projects/ecommerce/home/home_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -10,14 +12,7 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int selectedIndex = 0;
   List<Widget> _screens = [
-    Container(
-      child: Center(
-        child: Text(
-          "Home",
-          style: TextStyle(fontSize: 50),
-        ),
-      ),
-    ),
+    HomeScreen(),
     Container(
       child: Center(
         child: Text(
@@ -35,41 +30,23 @@ class _MainScreenState extends State<MainScreen> {
       ),
     ),
   ];
-  List<Widget> _navItems() => [
-        _navIcon(Icons.home, 0),
-        _navIcon(Icons.person, 1),
-        _navIcon(Icons.settings, 2),
-      ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: _screens[selectedIndex],
-      bottomNavigationBar: Container(
-        height: 60,
-        width: double.infinity,
-        margin: EdgeInsets.all(10),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          color: Colors.green,
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: _navItems(),
-        ),
-      ),
-    );
-  }
-
-  Widget _navIcon(IconData icon, int index) {
-    return InkWell(
-      onTap: () {
-        selectedIndex = index;
-        setState(() {});
-      },
-      child: Icon(
-        icon,
-        size: 40,
-        color: index == selectedIndex ? Colors.white : null,
+      bottomNavigationBar: CurvedNavigationBar(
+        index: selectedIndex,
+        backgroundColor: Colors.grey.withOpacity(.2),
+        items: const [
+          Icon(Icons.home, size: 30),
+          Icon(Icons.person, size: 30),
+          Icon(Icons.settings, size: 30),
+        ],
+        onTap: (index) {
+          selectedIndex = index;
+          setState(() {});
+        },
       ),
     );
   }
