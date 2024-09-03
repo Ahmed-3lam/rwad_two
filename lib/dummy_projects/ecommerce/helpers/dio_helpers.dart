@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:rwad_two/dummy_projects/ecommerce/helpers/hive_helper.dart';
 import 'package:rwad_two/dummy_projects/ecommerce/helpers/kapi.dart';
 
 class DioHelpers {
@@ -14,7 +15,7 @@ class DioHelpers {
           seconds: 60,
         ),
         headers: {
-          "lang": "en",
+          "lang": HiveHelper.getLanguage(),
           "Content-Type": "application/json",
         },
       ),

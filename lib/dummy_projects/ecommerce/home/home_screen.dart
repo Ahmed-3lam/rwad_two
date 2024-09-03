@@ -1,8 +1,10 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:rwad_two/dummy_projects/ecommerce/home/cubit/home_cubit.dart';
 import 'package:rwad_two/dummy_projects/ecommerce/home/model/BannerModel.dart';
+import 'package:rwad_two/dummy_projects/ecommerce/language_cubit/language_cubit.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -26,7 +28,7 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      Text("Current Location"),
+                      Text(AppLocalizations.of(context)!.current_location),
                       Icon(
                         Icons.keyboard_arrow_down_sharp,
                         color: Colors.green,
@@ -46,9 +48,19 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
         actions: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Icon(Icons.search),
+          InkWell(
+            onTap: () {
+              if (LanguageCubit.isArabic) {
+                context.read<LanguageCubit>().toEnglish();
+              } else {
+                context.read<LanguageCubit>().toArabic();
+              }
+              cubit.getProducts();
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Icon(Icons.search),
+            ),
           ),
         ],
       ),
